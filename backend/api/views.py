@@ -44,6 +44,7 @@ def getRoutes(request):
     return Response(routes)
 
 
+@api_view(['GET'])
 def getNotes(request):
     notes = Note.objects.all().order_by('-updated')
     if not notes:
@@ -59,6 +60,19 @@ def getNote(request, pk):
         return HttpResponse("Note not found", status=status.HTTP_404_NOT_FOUND)
     serializer = NoteSerializer(note, many=False)
     return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def createNote(request):
+    data = request.data
+    note = Note.objects.create(
+        title=data['title'],
+        body=data['body']
+        
+    )
+    serializer = NoteSerializer(note, many=False)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_201_CREATED)
+
+
 
 @api_view(['PUT', 'PATCH'])
 def updateNote(request, pk):

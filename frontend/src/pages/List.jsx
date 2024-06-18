@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import ListItem from '../components/ListItem'
 import { Link } from 'react-router-dom'
 
+
 const NotesList = () => {
 
   let [notes, setNotes] = useState([])
