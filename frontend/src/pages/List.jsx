@@ -20,15 +20,17 @@ const NotesList = () => {
   }
 
   return (
-    <div>
-      <h1 style={{textAlign: 'center'}}>Notes</h1>
-      <ul>
-        {notes.map(note => (
-          <li key={note.id}>
-            <Link to={`/note/${note.id}`}>{note.title}</Link>
-          </li>
+    <div className='notes'>
+      <div className='notes-header'>
+        <h2 className='notes-title'>&#9782;Notes</h2>
+        <p className='notes-count'>{notes.length}</p>
+        <Link to='/note/new'>Add Note</Link>
+      </div>
+      <div className='notes-list'>
+        {notes.map((note, index) => (
+          <ListItem key={index} note={note} />
         ))}
-      </ul>
+      </div>
     </div>
   )
 }

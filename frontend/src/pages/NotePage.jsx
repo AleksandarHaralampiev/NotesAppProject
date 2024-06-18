@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Image from '../assets/left-arrow.png';
+
 
 const NotePage = () => {
     let [note, setNote] = useState({})
@@ -22,9 +25,18 @@ const NotePage = () => {
     }
 
     return (
-        <div>
-            <h2>{note?.title}</h2>
-            <p>{note?.body}</p>
+        <div className='note'>
+            <div className='note-header'>
+                <h3><Link to='/'>
+                    <img style={{ maxWidth: '30px' }} src={Image} alt='Back' />
+                </Link></h3>
+            </div>
+            <div className='note-header'>
+                <h3>{note?.title}</h3>
+            </div>
+            <div className='note-body'>
+                <textarea defaultValue={note?.body}></textarea>
+            </div>
         </div>
     )
 }

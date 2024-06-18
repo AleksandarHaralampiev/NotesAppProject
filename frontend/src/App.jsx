@@ -10,12 +10,14 @@ import './App.css'
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="container">
+        <div className="app">
         <Header />
         <Routes>
           <Route path="/" element={<NotesList />} />
           <Route path="/note/:id" element={<NotePage />} />
         </Routes>
+        </div>
       </div>
     </Router>
   );
