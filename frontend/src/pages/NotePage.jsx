@@ -58,8 +58,10 @@ const NotePage = ( ) => {
            await deleteNote()
         } else if (id !== 'new') {
             await updateNote()
-        } else if (id === 'new' && note.body !== null && note.title !== null) {
+        } else if (id === 'new' && note.body !== '' && note.title !== '') {
             await createNote()
+        } else if (id === 'new' && note.body === '' && note.title === '') {
+            await deleteNote()
         }
     
         window.location = '/';
@@ -96,14 +98,14 @@ const NotePage = ( ) => {
                 {id !== 'new' ? (
                     <button onClick={deleteNote}>DELETE</button>
                 ) : (
-                    <button onClick={handleSubmit}>CANCEL</button>
+                    <button onClick={deleteNote}>CANCEL</button>
                 )
                 }
             </div>
             <div className='note-header'>
                 <input
                     type='text'
-                    value={note.title}
+                    value={note?.title}
                     onChange={(e) => {setNote({...note, 'title': e.target.value})}}
                     className='note-input'
                     style={{ border: '2px solid lightblue', borderRadius: '5px', padding: '5px', backgroundColor: '#1f2124', color: ''}}
@@ -112,7 +114,7 @@ const NotePage = ( ) => {
             <div className='note-body'>
                 <textarea
                     onChange={(e) => {setNote({...note, 'body': e.target.value})}}
-                    defaultValue={note?.body}
+                    value={note?.body}
                     className='note-textarea'
                     style={{ border: '1px solid lightblue', borderRadius: '5px', padding: '5px' }}
                 ></textarea>
