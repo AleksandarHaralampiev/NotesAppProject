@@ -63,8 +63,9 @@ a {
     height: 88vh;
     margin: 0 auto;
     background-color: var(--color-dark);
-    box-shadow: 0px 0px 20px rgba(255, 106, 193, 0.3);
+    box-shadow: 0px 0px 40px rgba(62, 190, 244, 0.3);
     position: relative;
+    border-radius: 10px;
 }
 
 .app-header {
@@ -74,6 +75,7 @@ a {
     justify-content: space-between;
     background-color: var(--color-lighter);
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 0 0;
 }
 
 .app-header h1 {
@@ -81,6 +83,7 @@ a {
     color: var(--color-text);
     font-weight: 800;
     text-align: center;
+    text-shadow: 0px 1px 5px rgba(199, 72, 210, 0.36);
 }
 
 .app-header button {
@@ -185,6 +188,9 @@ a {
 /*==============================
 =>  Note Styles
 ================================*/
+*:focus {
+    outline: none;
+}
 
 .note-header {
     display: flex;

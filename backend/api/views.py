@@ -45,7 +45,7 @@ def getRoutes(request):
 
 
 def getNotes(request):
-    notes = Note.objects.all()
+    notes = Note.objects.all().order_by('-updated')
     if not notes:
         return HttpResponse("No notes found", status=status.HTTP_404_NOT_FOUND)
     serializer = NoteSerializer(notes, many=True)
@@ -60,7 +60,7 @@ def getNote(request, pk):
     serializer = NoteSerializer(note, many=False)
     return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
 
-@api_view(['PUT'])
+@api_view(['PUT', 'PATCH'])
 def updateNote(request, pk):
     try:
         note = Note.objects.get(id=pk)
@@ -72,17 +72,17 @@ def updateNote(request, pk):
         return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['PATCH'])
-def updateNote(request, pk):
-    try:
-        note = Note.objects.get(id=pk)
-    except Note.DoesNotExist:
-        return HttpResponse("Note not found", status=status.HTTP_404_NOT_FOUND)
-    serializer = NoteSerializer(instance=note, data=request.data, partial=True)
-    if serializer.is_valid():
-        serializer.save()
-        return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
-    return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['PATCH'])
+# def updateNote(request, pk):
+#     try:
+#         note = Note.objects.get(id=pk)
+#     except Note.DoesNotExist:
+#         return HttpResponse("Note not found", status=status.HTTP_404_NOT_FOUND)
+#     serializer = NoteSerializer(instance=note, data=request.data, partial=True)
+#     if serializer.is_valid():
+#         serializer.save()
+#         return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+#     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
 def deleteNote(request, pk):
