@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import ListItem from '../components/ListItem'
-
+import { Link } from 'react-router-dom'
 
 const NotesList = () => {
 
@@ -22,10 +22,10 @@ const NotesList = () => {
   return (
     <div>
       <h1 style={{textAlign: 'center'}}>Notes</h1>
-      <ul style={{listStyleType: 'none', padding: 0}}>
-        {notes.map((note, index) => (
-          <li key={note.id} style={{marginBottom: '10px'}}>
-            <ListItem key={index} note={note} />
+      <ul>
+        {notes.map(note => (
+          <li key={note.id}>
+            <Link to={`/note/${note.id}`}>{note.title}</Link>
           </li>
         ))}
       </ul>
